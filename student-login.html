@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Portfolio</title>
+    <style>
+        /* Center align the content */
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f4f4f4;
+        }
+        .background-container {
+            position: relative;
+            height: 100vh;
+            width: 100%;
+            background-image: linear-gradient(rgba(0, 0, 0, 0.374),rgba(0, 0, 0, 0.374)), url(images/stdmain1.jpeg);
+            background-size: 100%;
+            background-position: center;
+            display: flex; 
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        .container {
+            text-align: center;
+        }
+        h1 {
+            margin-bottom: 20px;
+            font-size: 24px;
+        }
+        .button-container {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .user-info {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            color: #fff;
+            font-weight: bold;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="background-container">
+        <div class="user-info" id="user-info"></div>
+        <h1>Student Login</h1>
+        <div class="button-container">
+            <button id="btn-student-details">Enter Student Details</button>
+            <button id="btn-about-me">About Me</button>
+            <button id="btn-education">Education</button>
+            <button id="btn-projects">Projects</button>
+            <button id="btn-courses-certifications">Courses and Certifications</button>
+            <button id="btn-skills">Skills</button>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const userInfo = document.getElementById("user-info");
+
+            // Function to retrieve URL parameters by name
+            function getParameterByName(name, url) {
+                if (!url) url = window.location.href;
+                name = name.replace(/[\[\]]/g, '\\$&');
+                var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)');
+                var results = regex.exec(url);
+                if (!results) return null;
+                if (!results[2]) return '';
+                return decodeURIComponent(results[2].replace(/\+/g, ' '));
+            }
+
+            // Get the username from the URL parameter
+            var username = getParameterByName('username');
+
+            // Display the username in the designated area
+            userInfo.textContent = username;
+
+            // Add a click event to the user info to log out and prevent going back
+            userInfo.addEventListener("click", function () {
+                if (confirm("Are you sure you want to log out?")) {
+                    // You can implement the logout action here
+                    window.location.href = "login.php"; // Replace with your actual login page
+                }
+            });
+
+            // Function to redirect to a page with the username as a URL parameter
+            function redirectToPage(page) {
+                // Construct the URL with the username parameter
+                const url = `${page}?username=${encodeURIComponent(username)}`;
+
+                // Redirect to the selected page with the username as a parameter
+                window.location.href = url;
+            }
+
+            // Add click events to the buttons to redirect to other pages with the username
+            document.getElementById('btn-student-details').addEventListener('click', function () {
+                redirectToPage('student-details.html');
+            });
+            document.getElementById('btn-about-me').addEventListener('click', function () {
+                redirectToPage('about-me.html');
+            });
+            document.getElementById('btn-education').addEventListener('click', function () {
+                redirectToPage('education.html');
+            });
+            document.getElementById('btn-projects').addEventListener('click', function () {
+                redirectToPage('projects.html');
+            });
+            document.getElementById('btn-courses-certifications').addEventListener('click', function () {
+                redirectToPage('courses-certifications.html');
+            });
+            document.getElementById('btn-skills').addEventListener('click', function () {
+                redirectToPage('skills.html');
+            });
+        });
+    </script>
+</body>
+</html>

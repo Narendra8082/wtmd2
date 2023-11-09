@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Courses and Certifications</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        
+        .form-container {
+            width: 600px;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        
+        .section {
+            margin-top: 20px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+        }
+        
+        .section h3 {
+            margin: 0 0 10px;
+        }
+        
+        .list {
+            padding: 10px 0;
+        }
+        
+        .list-item {
+            margin: 5px 0;
+            padding: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #fff;
+        }
+        
+        textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            resize: vertical;
+        }
+        
+        button[type="submit"] {
+            display: block;
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="form-container">
+        <h1>Courses and Certifications</h1>
+        <form id="courses-form" action="process_courses.php" method="post">
+            <!-- Display the username in the "REGDNO" input field -->
+            <b>your username <br><br></b>
+            <input type="text" id="REGDNO" name="REGDNO" required>
+            <!-- End of display -->
+
+            <div class="section">
+                <h3>Courses Completed:</h3>
+                <div class="list courses-list">
+                    <!-- List of added courses will be displayed here -->
+                </div>
+                <textarea id="course" name="course" placeholder="Add a course..."></textarea>
+            </div>
+
+            <div class="section">
+                <h3>Certifications Completed:</h3>
+                <div class="list certifications-list">
+                    <!-- List of added certifications will be displayed here -->
+                </div>
+                <textarea id="certification" name="certification" placeholder="Add a certification..."></textarea>
+            </div>
+
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+    
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            // Function to retrieve URL parameters by name
+            function getParameterByName(name, url) {
+                if (!url) url = window.location.href;
+                name = name.replace(/[\[\]]/g, '\\$&');
+                var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)');
+                var results = regex.exec(url);
+                if (!results) return null;
+                if (!results[2]) return '';
+                return decodeURIComponent(results[2].replace(/\+/g, ' '));
+            }
+
+            // Get the username from the URL parameter
+            var username = getParameterByName('username');
+
+            // Display the username in the "REGDNO" input field
+            const regdnoField = document.getElementById("REGDNO");
+            regdnoField.value = username;
+        });
+    </script>
+</body>
+</html>
